@@ -15,7 +15,6 @@
 	captions=tableabove,		% display table captions above the float env
 	draft=false,				% value for draft version
 ]{scrreprt}%
-
 % **************************************************
 % Debug LaTeX Information
 % **************************************************
@@ -41,7 +40,7 @@
 \newcommand{\thesisFirstSupervisor}{ }
 \newcommand{\thesisSecondSupervisor}{ }
 
-\newcommand{\thesisUniversity}{\protect{Cité scolaire Pierre LAROUSSE}}
+\newcommand{\thesisUniversity}{\protect{Cit\'e scolaire Pierre LAROUSSE}}
 \newcommand{\thesisUniversityDepartment}{Sciences de la Vie et de la Terre}
 \newcommand{\thesisUniversityInstitute}{ }
 \newcommand{\thesisUniversityGroup}{ }
@@ -53,6 +52,9 @@
 % Load and Configure Packages
 % **************************************************
 \usepackage[utf8]{inputenc}		% defines file's character encoding
+
+\usepackage[T1]{fontenc}
+
 \usepackage[french]{babel} % babel system, adjust the language of the content
 \usepackage[					% clean thesis style
 	figuresep=colon,%
@@ -104,8 +106,8 @@
 \input{content/abstract}		% INCLUDE: the abstracts (english and german)
 \cleardoublepage
 %
-\input{content/acknowledgement} % INCLUDE: acknowledgement
-\cleardoublepage
+%\input{content/acknowledgement} % INCLUDE: acknowledgement
+%\cleardoublepage
 %
 \setcounter{tocdepth}{2}		% define depth of toc
 \tableofcontents				% display table of contents
