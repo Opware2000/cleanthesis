@@ -167,19 +167,23 @@
 
 % sets the main and accessory color for the document
 \def\cthesissetcolor#1#2#3{%
-	\definecolor{ctcolormain}{#1}{#2}%
+%	\definecolor{ctcolormain}{#1}{#2}%
+%	\definecolor{ctcolormain}{cmyk}{.73, .45, 0, 0}%
+	\definecolor{ctcolormain}{RGB}{21, 126, 251}%	
 	\definecolor{ctcoloraccessory}{#1}{#3}%
 	\ct@cthesis@updatecolors%
 }
 
 % sets the blue-magenta color theme (blue/magenta)
 \def\cthesissetcolorbluemagenta{%
-	\cthesissetcolor{cmyk}{1, .50, .10, .01}{.18, .98, .18, 0}%
+%	\cthesissetcolor{cmyk}{1, .50, .10, .01}{.18, .98, .18, 0}%
+	\cthesissetcolor{cmyk}{.77, .51, 0, 0}{.18, .98, .18, 0}%
 }
 
 % sets the blue-green color theme (blue/green)
 \def\cthesissetcolorbluegreen{%
 	\cthesissetcolor{cmyk}{.61, .47, .03, 0}{.48, .05, .91, 0}%
+
 }
 
 % defines general colors
@@ -253,22 +257,57 @@
 %	}{}
 \fi
 %
-\RequirePackage[					% page layout modifications
-	paper=a4paper,					% 	- use A4 paper size
-	%scale={0.86,0.94},				% 	- total body size (h,v)
-	%scale={0.86,0.94},				% 	- total body size (h,v)
+%\RequirePackage[					% page layout modifications
+%	paper=a4paper,					% 	- use A4 paper size
+%	%scale={0.86,0.94},				% 	- total body size (h,v)
+%	%scale={0.86,0.94},				% 	- total body size (h,v)
+%	nohead,							% 	- no header
+%	includefoot,					% 	- include footer space
+%	includemp,						% 	- include side note space
+%	bindingoffset=0.5cm,			% 	- binding correction
+%	top=2.25cm,						% 	- total body: top margin
+%	left=3.75cm,					% 	- total body: left margin (odd pages)
+%	right=0.75cm,					% 	- total body: right margin (odd pages)
+%	bottom=1.5cm,					% 	- total body: bottom margin
+%	marginparwidth=1.75cm,			% 	- width for side note
+%	marginparsep=10pt,				% 	- space between notes and body text (content)
+%	footskip=2cm,					% 	- footer skip size
+%]{geometry}
+
+\RequirePackage[
+	%paperheight=25.401cm,
+	%paperwidth=20.32cm,
+	paperheight = 10.250in,
+	paperwidth  =  8.125in,
 	nohead,							% 	- no header
 	includefoot,					% 	- include footer space
 	includemp,						% 	- include side note space
 	bindingoffset=0.5cm,			% 	- binding correction
-	top=2.25cm,						% 	- total body: top margin
-	left=3.75cm,					% 	- total body: left margin (odd pages)
-	right=0.75cm,					% 	- total body: right margin (odd pages)
-	bottom=1.5cm,					% 	- total body: bottom margin
-	marginparwidth=1.75cm,			% 	- width for side note
-	marginparsep=10pt,				% 	- space between notes and body text (content)
+	%top=0.635cm,
+	%bottom=0.635cm,
+	%right=0.635cm,
+	%left=1.5875cm,
+	bottom=0.952cm,
+	right =0.952cm,
+	top   =1.5875cm,
+	left  =2.2225cm,
+	marginparwidth=1cm,			% 	- width for side note
+	marginparsep=0pt,				% 	- space between notes and body text (content)
 	footskip=2cm,					% 	- footer skip size
+%	showframe,
+%	showcrop,
+	heightrounded
 ]{geometry}
+%\RequirePackage[
+%	cam,axes,
+	%height=26.035cm,
+	%width=20.637cm, 
+%	height=29.7cm,
+%	width=21cm,
+%	center,
+%	pdflatex,
+%]{crop}
+
 %
 \RequirePackage[					% advanced quotes
 	strict=true,					% 	- warning are errors now
@@ -294,11 +333,24 @@
 	mincitenames=1%
 ]{biblatex}
 \bibliography{\cthesis@bibfile}
-\DefineBibliographyStrings{ngerman}{%
+\DefineBibliographyStrings{french}{%
 	andothers = {{et\,al\adddot}}, % 'et al.' instead of 'u.a.'
-	backrefpage = {{zitiert auf Seite}},%
-	backrefpages = {{zitiert auf den Seiten}},%
+	backrefpage = {{cité à la page}},%
+	backrefpages = {{cités aux pages}},%
 }
+
+\RequirePackage{nota}
+%-----------------------------------------------------------------------
+%
+% configuration de l'environnement nota
+%
+\newcommand{\ficnota}{img/icon-136-document-edit}
+\newcommand{\ficnotahack}{img/icon-61-warning}
+\newcommand{\ficnote}{img/icon-136-document-edit}
+
+\newenvironment{nota}{\begin{pictonote}{\ficnota}}{\end{pictonote}}
+\newenvironment{notahack}{\begin{pictonote}{\ficnotahack}}{\end{pictonote}}
+\newenvironment{note}{\begin{pictonote}{\ficnote}}{\end{pictonote}}
 
 % **************************************************
 % Text Format
@@ -437,39 +489,39 @@
 %
 % --------------------------------------------------
 % RESULT = (siehe 3.4)
-\newcommand{\tref}[1]{(siehe \ref{#1})}
+\newcommand{\tref}[1]{(voir \ref{#1})}
 %
 % RESULT = Abschnitt 3.4
-\newcommand{\treft}[1]{Abschnitt~\ref{#1}}
+\newcommand{\treft}[1]{paragraphe~\ref{#1}}
 %
 % RESULT = (siehe 3.4, Seite 12)
-\newcommand{\textref}[1]{(siehe \ref{#1}, Seite~\pageref{#1})}
+\newcommand{\textref}[1]{(voir \ref{#1}, page~\pageref{#1})}
 %
 % RESULT = Abschnitt 3.4 (siehe Seite 12)
-\newcommand{\textreft}[1]{Abschnitt~\ref{#1} (siehe Seite~\pageref{#1})}
+\newcommand{\textreft}[1]{paragraphe~\ref{#1} (voir page~\pageref{#1})}
 %
 % --------------------------------------------------
 % RESULT = (siehe Abb. 10.4)
-\newcommand{\fref}[1]{(siehe Abb.~\ref{#1})}
+\newcommand{\fref}[1]{(voir fig.~\ref{#1})}
 %
 % RESULT = (siehe Abb. 10.4 b)
-\newcommand{\frefadd}[2]{(siehe Abb.~\ref{#1}~#2)}
+\newcommand{\frefadd}[2]{(voir fig.~\ref{#1}~#2)}
 %
 % RESULT = (siehe Abb. 10.4, Seite 12)
-\newcommand{\figref}[1]{(siehe Abb.~\ref{#1}, Seite~\pageref{#1})}
+\newcommand{\figref}[1]{(voir fig.~\ref{#1}, page~\pageref{#1})}
 %
 % RESULT = (siehe Abb. 10.4 b, Seite 12)
-\newcommand{\figrefadd}[2]{(siehe Abb.~\ref{#1}~#2, Seite~\pageref{#1})}
+\newcommand{\figrefadd}[2]{(voir fig.~\ref{#1}~#2, page~\pageref{#1})}
 %
 % RESULT = Abbildung 10.4
-\newcommand{\figreft}[1]{Abbildung~\ref{#1}}
+\newcommand{\figreft}[1]{figure~\ref{#1}}
 %
 % RESULT = Abbildung 10.4 b
-\newcommand{\figrefaddt}[2]{Abbildung~\ref{#1}~#2}
+\newcommand{\figrefaddt}[2]{figure~\ref{#1}~#2}
 %
 % --------------------------------------------------
 % RESULT = (siehe Seite 12)
-\newcommand{\seepage}[1]{(siehe Seite~\pageref{#1})}
+\newcommand{\seepage}[1]{(voir page~\pageref{#1})}
 
 
 % **************************************************
@@ -479,13 +531,16 @@
 \newcommand*{\ctSetFont}[3]{%
 	arg1=#1, arg2=#2, arg3=#3%
 }
+\addto{\captionsfrench}{
+    \renewcommand*{\chaptername}{}}
 
 % own font definitions
 \newcommand{\helv}{\fontfamily{phv}\fontsize{9}{11}\selectfont}
-\newcommand{\book}{\fontfamily{pbk}\fontseries{m}\fontsize{11}{13}\selectfont}
+%\newcommand{\book}{\fontfamily{pbk}\fontseries{m}\fontsize{11}{13}\selectfont}
+\newcommand{\book}{\fontfamily{phv}\fontsize{9}{11}\selectfont}
 \newcommand{\tgherosfont}{\fontfamily{qhv}\selectfont}
 
-\newcommand{\thesispartlabelfont}{\color{ctcolorpartnum}\book\fontsize{60}{60}\selectfont}
+\newcommand{\thesispartlabelfont}{\color{ctcolorpartnum}\book\fontsize{60}{60} \selectfont}
 \newcommand{\thesispartfont}{\color{ctcolorparttext}\huge \tgherosfont\selectfont}
 \newcommand{\thesischapterfont}{\color{ctcolorblack}\huge \fontfamily{phv}\selectfont}
 %\newcommand{\thesissectionfont}{\color{ctcolormain}\LARGE\bfseries \tgherosfont}
@@ -570,7 +625,7 @@
 			{\usekomafont{section}}%
 			{\color{ctcolorblack}\thesection\hspace*{10pt}}%
 			{0pt}%
-			{\raggedright}%
+			{}%
 			[\phantomsection]
 %	}{%
 \else
@@ -578,7 +633,7 @@
 			{\usekomafont{section}}%
 			{\color{ctcolorblack}\thesection\hspace*{10pt}}%
 			{0pt}%
-			{\raggedright}%
+			{}%
 			[\phantomsection]
 %	}
 \fi
@@ -592,7 +647,7 @@
 			{\usekomafont{subsection}}%
 			{\color{ctcolorblack}\thesubsection\hspace*{10pt}}%
 			{0pt}%
-			{\raggedright}%
+			{}%
 			[\phantomsection]
 %	}{%
 \else
@@ -600,7 +655,7 @@
 			{\usekomafont{subsection}}%
 			{\color{ctcolorblack}\thesubsection\hspace*{10pt}}%
 			{0pt}%
-			{\raggedright}%
+			{}%
 			[\phantomsection]
 %	}
 \fi
@@ -678,6 +733,7 @@
 %
 % Clean signs around word origins in definitions
 %\newcommand{\cthesisorigin}[1]{\textsf{\textlangle}#1\textsf{\textrangle}}
+
 
 
 
