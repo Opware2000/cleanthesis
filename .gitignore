@@ -13,3 +13,7 @@
 *.fdb_latexmk
 README.html
 CHANGELOG.html
+*.pdf
+img/Hawcons/*
+img/Hawcons.zip
+*.fls
