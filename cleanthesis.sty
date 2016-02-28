@@ -108,7 +108,7 @@
 %
 %
 % The xcolor package enables us to create/handle/name different colors
-\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage[usenames,dvipsnames]{xcolor}
 
 % updates all colors regarding the defined main and accessory
 % color, as well as the defined colorize mode (full, reduced, bw)
@@ -351,6 +351,11 @@
 \newenvironment{nota}{\begin{pictonote}{\ficnota}}{\end{pictonote}}
 \newenvironment{notahack}{\begin{pictonote}{\ficnotahack}}{\end{pictonote}}
 \newenvironment{note}{\begin{pictonote}{\ficnote}}{\end{pictonote}}
+
+% ---------------------------------------------------
+% INFO BULLES
+% ---------------------------------------------------
+\RequirePackage{infoBulle}
 
 % **************************************************
 % Text Format
